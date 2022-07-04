@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>NS3 - Documentation</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/color-brewer.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">NS3</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#all-the-ns3-lab-classes" class="nav-link">All the NS3 Lab Classes.</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#first-class" class="nav-link">First Class</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#second-class" class="nav-link">Second Class</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#third-class" class="nav-link">Third Class</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="all-the-ns3-lab-classes">All the NS3 Lab Classes.</h1>
+<h2 id="first-class">First Class</h2>
+<h3 id="class-code">Class Code</h3>
+<pre><code>
+#include &quot;ns3/core-module.h&quot;
+#include &quot;ns3/network-module.h&quot;
+#include &quot;ns3/internet-module.h&quot;
+#include &quot;ns3/point-to-point-module.h&quot;
+#include &quot;ns3/applications-module.h&quot;
+
+using namespace ns3;
+// Log Component
+NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;)
+int main() {
+// Set Time Resolution
+Time::SetResolution(Time::NS);
+// Enable Log Components and set Log levels
+LogComponentEnable(&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
+LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
+
+    // Node Container
+    NodeContainer nodes;
+    nodes.create(2);
+
+    // Create Channel
+    PointToPointHelper pointToPoint;
+    pointToPoint.setDeviceAttribute(&quot;DataRate&quot;, StringVale(&quot;5Mbps&quot;));
+    pointToPoint.setChannelAttribute(&quot;Delay&quot;, StringValue(&quot;2ms&quot;));
+    // Create Net Device and bind them to Channel
+    NetDeviceContainer devices;
+    devices = pointToPoint.Install(nodes);
+
+    // Create InternetStack
+    InternetStackHelper stack;
+    // Set IP network address
+    stack.Install(nodes);
+    Ipv4AddressHelper address;
+    // Assign IP to NetDevice
+    address.SetBase(&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
+    Ipv4InterfaceContainer interfaces = address.Assign(devices);
+    // Create echo server
+    UdpEchoServerHelper echoServer(9);
+    // Install echo server to node 1, mark it application, and set start and stop time
+    ApplicationContainer serverApps = echoServer.Install(nodes.Get(1));
+    serverApps.Start(Seconds(1.0));
+    serverApps.Stop(Seconds(10.0));
+    // Create echo client and set its attributes
+    UdpEchoClientHelper echoClient(interfaces.GetAddress(1), 9);
+    echoClient.SetAttribute(&quot;MaxPackets&quot;, UintegerValue(1));
+    echoClient.SetAttribute(&quot;Interval&quot;, TimeValue(Seconds(1.0)));
+    echoClient.SetAttribute(&quot;PacketSize&quot;, UintegerValue(1024));
+    // Install echo client to node 0, mark it application, and set start and stop time
+    ApplicationContainer clientApps = echoClient.Install(nodes.Get(0));
+    clientApps.Start(Seconds(2.0));
+    clientApps.Stop(Seconds(10.0));
+
+    Simulator::Run();
+    Simulator::Destroy();
+    return 0;
+
+}
+
+</code></pre>
+<h3 id="examples">Examples</h3>
+<pre><code>  #include &quot;ns3/core-module.h&quot;
+  #include &quot;ns3/network-module.h&quot;
+  #include &quot;ns3/internet-module.h&quot;
+  #include &quot;ns3/point-to-point-module.h&quot;
+  #include &quot;ns3/applications-module.h&quot;
+
+  using namespace ns3;
+  // Log Component
+  NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;)
+  int main() {
+    // Change Parameters.
+    int packetSize = UintegerValue(1024);
+    int packetDelay = TimeValue(Seconds(1.0));
+    int dataLinkRate = &quot;5Mbps&quot;;
+    int dataLinkDelay = &quot;2ms&quot;;
+
+    // Set Time Resolution
+    Time::SetResolution(Time::NS);
+    // Enable Log Components and set Log levels
+    LogComponentEnable(&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
+    LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
+
+    // Node Container
+    NodeContainer nodes;
+    nodes.create(2);
+
+    // Create Channel
+    PointToPointHelper pointToPoint;
+    pointToPoint.setDeviceAttribute(&quot;DataRate&quot;, StringVale(dataLinkRate));
+    pointToPoint.setChannelAttribute(&quot;Delay&quot;, StringValue(dataLinkDelay));
+    // Create Net Device and bind them to Channel
+    NetDeviceContainer devices;
+    devices = pointToPoint.Install(nodes);
+
+    // Create InternetStack
+    InternetStackHelper stack;
+    // Set IP network address
+    stack.Install(nodes);
+    Ipv4AddressHelper address;
+    // Assign IP to NetDevice
+    address.SetBase(&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
+    Ipv4InterfaceContainer interfaces = address.Assign(devices);
+    // Create echo server
+    UdpEchoServerHelper echoServer(9);
+    // Install echo server to node 1, mark it application, and set start and stop time
+    ApplicationContainer serverApps = echoServer.Install(nodes.Get(1));
+    serverApps.Start(Seconds(1.0));
+    serverApps.Stop(Seconds(10.0));
+    // Create echo client and set its attributes
+    UdpEchoClientHelper echoClient(interfaces.GetAddress(1), 9);
+    echoClient.SetAttribute(&quot;MaxPackets&quot;, UintegerValue(1));
+    echoClient.SetAttribute(&quot;Interval&quot;, packetDelay);
+    echoClient.SetAttribute(&quot;PacketSize&quot;, packetSize);
+    // Install echo client to node 0, mark it application, and set start and stop time
+    ApplicationContainer clientApps = echoClient.Install(nodes.Get(0));
+    clientApps.Start(Seconds(2.0));
+    clientApps.Stop(Seconds(10.0));
+
+    Simulator::Run();
+    Simulator::Destroy();
+    return 0;
+  }
+</code></pre>
+<h2 id="second-class">Second Class</h2>
+<h3 id="class-code_1">Class Code</h3>
+<pre><code>  #include &quot;ns3/core-module.h&quot;
+  #include &quot;ns3/network-module.h&quot;
+  #include &quot;ns3/internet-module.h&quot;
+  #include &quot;ns3/point-to-point-module.h&quot;
+  #include &quot;ns3/applications-module.h&quot;
+
+  using namespace ns3;
+  // Log Component
+  NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;)
+  // Set Time Resolution
+  Time::SetResolution(Time::NS);
+  // Enable Log Components and set Log levels
+  LogComponentEnable(&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
+  LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
+
+  // Node Container
+  NodeContainer nodes;
+  nodes.create(2);
+
+  // Create Channel
+  PointToPointHelper pointToPoint;
+  pointToPoint.setDeviceAttribute(&quot;DataRate&quot;, StringVale(&quot;5Mbps&quot;));
+  pointToPoint.setChannelAttribute(&quot;Delay&quot;, StringValue(&quot;2ms&quot;));
+  // Create Net Device and bind them to Channel
+  NetDeviceContainer devices;
+  devices = pointToPoint.Install(nodes);
+
+  // Create InternetStack
+  InternetStackHelper stack;
+  // Set IP network address
+  stack.Install(nodes);
+  Ipv4AddressHelper address;
+  // Assign IP to NetDevice
+  address.SetBase(&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
+  Ipv4InterfaceContainer interfaces = address.Assign(devices);
+  // Create echo server
+  UdpEchoServerHelper echoServer(9);
+  // Install echo server to node 1, mark it application, and set start and stop time
+  ApplicationContainer serverApps = echoServer.Install(nodes.Get(1));
+  serverApps.Start(Seconds(1.0));
+  serverApps.Stop(Seconds(10.0));
+  // Create echo client and set its attributes
+  UdpEchoClientHelper echoClient(interfaces.GetAddress(1), 9);
+  echoClient.SetAttribute(&quot;MaxPackets&quot;, UintegerValue(1));
+  echoClient.SetAttribute(&quot;Interval&quot;, TimeValue(Seconds(1.0)));
+  echoClient.SetAttribute(&quot;PacketSize&quot;, UintegerValue(1024));
+  // Install echo client to node 0, mark it application, and set start and stop time
+  ApplicationContainer clientApps = echoClient.Install(nodes.Get(0));
+  clientApps.Start(Seconds(2.0));
+  clientApps.Stop(Seconds(10.0));
+
+  Simulator::Run();
+  Simulator::Destroy();
+  return 0;
+</code></pre>
+<h3 id="examples_1">Examples</h3>
+<pre><code>  #include &quot;ns3/core-module.h&quot;
+  #include &quot;ns3/network-module.h&quot;
+  #include &quot;ns3/internet-module.h&quot;
+  #include &quot;ns3/point-to-point-module.h&quot;
+  #include &quot;ns3/applications-module.h&quot;
+
+  using namespace ns3;
+  // Log Component
+  NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;)
+  // Set Time Resolution
+  Time::SetResolution(Time::NS);
+  // Enable Log Components and set Log levels
+  LogComponentEnable(&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
+  LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
+
+  // Node Container
+  NodeContainer nodes;
+  nodes.create(2);
+
+  // Create Channel
+  PointToPointHelper pointToPoint;
+  pointToPoint.setDeviceAttribute(&quot;DataRate&quot;, StringVale(&quot;5Mbps&quot;));
+  pointToPoint.setChannelAttribute(&quot;Delay&quot;, StringValue(&quot;2ms&quot;));
+  // Create Net Device and bind them to Channel
+  NetDeviceContainer devices;
+  devices = pointToPoint.Install(nodes);
+
+  // Create InternetStack
+  InternetStackHelper stack;
+  // Set IP network address
+  stack.Install(nodes);
+  Ipv4AddressHelper address;
+  // Assign IP to NetDevice
+  address.SetBase(&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
+  Ipv4InterfaceContainer interfaces = address.Assign(devices);
+  // Create echo server
+  UdpEchoServerHelper echoServer(9);
+  // Install echo server to node 1, mark it application, and set start and stop time
+  ApplicationContainer serverApps = echoServer.Install(nodes.Get(1));
+  serverApps.Start(Seconds(1.0));
+  serverApps.Stop(Seconds(10.0));
+  // Create echo client and set its attributes
+  UdpEchoClientHelper echoClient(interfaces.GetAddress(1), 9);
+  echoClient.SetAttribute(&quot;MaxPackets&quot;, UintegerValue(1));
+  echoClient.SetAttribute(&quot;Interval&quot;, TimeValue(Seconds(1.0)));
+  echoClient.SetAttribute(&quot;PacketSize&quot;, UintegerValue(1024));
+  // Install echo client to node 0, mark it application, and set start and stop time
+  ApplicationContainer clientApps = echoClient.Install(nodes.Get(0));
+  clientApps.Start(Seconds(2.0));
+  clientApps.Stop(Seconds(10.0));
+
+  AsciiTraceHelper ascii;
+  pointToPoint.EnableAsciiAll (ascii.CreateFileStream (”myfirst.tr”));
+
+  Simulator::Run();
+  Simulator::Destroy();
+  return 0;
+</code></pre>
+<h2 id="third-class">Third Class</h2>
+<h3 id="class-code_2">Class Code</h3>
+<pre><code>#include &quot;ns3/core-module.h&quot;
+#include &quot;ns3/network-module.h&quot;
+#include &quot;ns3/csma-module.h&quot;
+#include &quot;ns3/internet-module.h&quot;
+#include &quot;ns3/point-to-point-module.h&quot;
+#include &quot;ns3/applications-module.h&quot;
+#include &quot;ns3/ipv4-global-routing-helper.h&quot;
+
+// Default Network Topology
+//
+//       10.1.1.0
+// n0 -------------- n1   n2   n3   n4
+//    point-to-point  |    |    |    |
+//                    ================
+//                      LAN 10.1.2.0
+
+
+using namespace ns3;
+
+NS_LOG_COMPONENT_DEFINE (&quot;SecondScriptExample&quot;);
+
+int
+main (int argc, char *argv[])
+{
+  bool verbose = true;
+  uint32_t nCsma = 3;
+
+  CommandLine cmd (__FILE__);
+  cmd.AddValue (&quot;nCsma&quot;, &quot;Number of \&quot;extra\&quot; CSMA nodes/devices&quot;, nCsma);
+  cmd.AddValue (&quot;verbose&quot;, &quot;Tell echo applications to log if true&quot;, verbose);
+
+  cmd.Parse (argc,argv);
+
+  if (verbose)
+  {
+    LogComponentEnable (&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
+    LogComponentEnable (&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
+  }
+
+  nCsma = nCsma == 0 ? 1 : nCsma;
+
+  NodeContainer p2pNodes;
+  p2pNodes.Create (2);
+
+  NodeContainer csmaNodes;
+  csmaNodes.Add (p2pNodes.Get (1));
+  csmaNodes.Create (nCsma);
+
+  PointToPointHelper pointToPoint;
+  pointToPoint.SetDeviceAttribute (&quot;DataRate&quot;, StringValue (&quot;5Mbps&quot;));
+  pointToPoint.SetChannelAttribute (&quot;Delay&quot;, StringValue (&quot;2ms&quot;));
+
+  NetDeviceContainer p2pDevices;
+  p2pDevices = pointToPoint.Install (p2pNodes);
+
+  CsmaHelper csma;
+  csma.SetChannelAttribute (&quot;DataRate&quot;, StringValue (&quot;100Mbps&quot;));
+  csma.SetChannelAttribute (&quot;Delay&quot;, TimeValue (NanoSeconds (6560)));
+
+  NetDeviceContainer csmaDevices;
+  csmaDevices = csma.Install (csmaNodes);
+
+  InternetStackHelper stack;
+  stack.Install (p2pNodes.Get (0));
+  stack.Install (csmaNodes);
+
+  Ipv4AddressHelper address;
+  address.SetBase (&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
+  Ipv4InterfaceContainer p2pInterfaces;
+  p2pInterfaces = address.Assign (p2pDevices);
+
+  address.SetBase (&quot;10.1.2.0&quot;, &quot;255.255.255.0&quot;);
+  Ipv4InterfaceContainer csmaInterfaces;
+  csmaInterfaces = address.Assign (csmaDevices);
+
+  UdpEchoServerHelper echoServer (9);
+
+  ApplicationContainer serverApps = echoServer.Install (csmaNodes.Get (nCsma));
+  serverApps.Start (Seconds (1.0));
+  serverApps.Stop (Seconds (10.0));
+
+  UdpEchoClientHelper echoClient (csmaInterfaces.GetAddress (nCsma), 9);
+  echoClient.SetAttribute (&quot;MaxPackets&quot;, UintegerValue (1));
+  echoClient.SetAttribute (&quot;Interval&quot;, TimeValue (Seconds (1.0)));
+  echoClient.SetAttribute (&quot;PacketSize&quot;, UintegerValue (1024));
+
+  ApplicationContainer clientApps = echoClient.Install (p2pNodes.Get (0));
+  clientApps.Start (Seconds (2.0));
+  clientApps.Stop (Seconds (10.0));
+
+  Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+
+  pointToPoint.EnablePcapAll (&quot;second&quot;);
+  csma.EnablePcap (&quot;second&quot;, csmaDevices.Get (1), true);
+
+  Simulator::Run ();
+  Simulator::Destroy ();
+  return 0;
+}
+
+</code></pre>
+<p><code>QUESTIONS</code></p>
+<ol>
+<li>What are nCsma and verbose for?</li>
+<li>How can we set DataRate and Delay for CSMA channel?</li>
+<li>How can we set routing functionality?</li>
+<li>How can we enable pcap logging for specific devices?</li>
+<li>How can we set a promiscuos mode and why do we need it?</li>
+</ol></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
