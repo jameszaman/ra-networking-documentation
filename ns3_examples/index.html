@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>SUMO - Documentation</title>
+        <title>NS3_Examples - Documentation</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -39,11 +39,11 @@
                             <li class="navitem">
                                 <a href="../ns3/" class="nav-link">NS3</a>
                             </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">SUMO</a>
-                            </li>
                             <li class="navitem">
-                                <a href="../ns3_examples/" class="nav-link">NS3_Examples</a>
+                                <a href="../sumo/" class="nav-link">SUMO</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">NS3_Examples</a>
                             </li>
                         </ul>
 
@@ -54,12 +54,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../ns3/" class="nav-link">
+                                <a rel="prev" href="../sumo/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../ns3_examples/" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -80,12 +80,126 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#ns3-comparison-graphs" class="nav-link">NS3 comparison graphs.</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#python-code-used-to-generate-all-the-codes" class="nav-link">Python code used to generate all the codes.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p>This documentation is created for the purpose of helping new learners learn about SUMO and its uses.</p></div>
+<h1 id="ns3-comparison-graphs">NS3 comparison graphs.</h1>
+<h2 id="python-code-used-to-generate-all-the-codes">Python code used to generate all the codes.</h2>
+<pre><code class="language-python">import os
+import shutil
+
+output_folder = 'opt'
+name = &quot;custom&quot;
+packetSizes = [&quot;512&quot;, &quot;1024&quot;, &quot;2048&quot;, &quot;4096&quot;, &quot;8192&quot;, &quot;16384&quot;, &quot;8192&quot;, &quot;16384&quot;]
+packetDelays = [&quot;1.0&quot;, &quot;2.0&quot;, &quot;3.0&quot;, &quot;4.0&quot;, &quot;5.0&quot;, &quot;6.0&quot;, &quot;7.0&quot;, &quot;8.0&quot;]
+dataLinkRates = [&quot;5Mbps&quot;, &quot;4Mbps&quot;, &quot;3Mbps&quot;, &quot;2Mbps&quot;, &quot;1Mbps&quot;]
+dataLinkDelays = [&quot;1ms&quot;, &quot;2ms&quot;, &quot;3ms&quot;, &quot;4ms&quot;, &quot;5ms&quot;]
+
+try:
+  shutil.rmtree(output_folder)
+except:
+  pass
+
+os.mkdir(output_folder)
+
+for packetSize in packetSizes:
+    for packetDelay in packetDelays:
+      for dataLinkRate in dataLinkRates:
+        for dataLinkDelay in dataLinkDelays:
+          initial_str = f&quot;&quot;&quot;#include &quot;ns3/core-module.h&quot;
+#include &quot;ns3/network-module.h&quot;
+#include &quot;ns3/internet-module.h&quot;
+#include &quot;ns3/point-to-point-module.h&quot;
+#include &quot;ns3/applications-module.h&quot;
+
+using namespace ns3;
+// Log Component
+NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;);
+int main() {{
+  // Change Parameters.
+  auto packetSize = UintegerValue({packetSize});
+  auto packetDelay = TimeValue(Seconds({packetDelay}));
+  auto dataLinkRate = &quot;{dataLinkRate}&quot;;
+  auto dataLinkDelay = &quot;{dataLinkDelay}&quot;;
+
+  // Set Time Resolution
+  Time::SetResolution(Time::NS);
+  // Enable Log Components and set Log levels
+  LogComponentEnable(&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
+  LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
+
+  // Node Container
+  NodeContainer nodes;
+  nodes.Create(2);
+
+  // Create Channel
+  PointToPointHelper pointToPoint;
+  pointToPoint.SetDeviceAttribute(&quot;DataRate&quot;, StringValue(dataLinkRate));
+  pointToPoint.SetChannelAttribute(&quot;Delay&quot;, StringValue(dataLinkDelay));
+  // Create Net Device and bind them to Channel
+  NetDeviceContainer devices;
+  devices = pointToPoint.Install(nodes);
+
+  // Create InternetStack
+  InternetStackHelper stack;
+  // Set IP network address
+  stack.Install(nodes);
+  Ipv4AddressHelper address;
+  // Assign IP to NetDevice
+  address.SetBase(&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
+  Ipv4InterfaceContainer interfaces = address.Assign(devices);
+  // Create echo server
+  UdpEchoServerHelper echoServer(9);
+  // Install echo server to node 1, mark it application, and set start and stop time
+  ApplicationContainer serverApps = echoServer.Install(nodes.Get(1));
+  serverApps.Start(Seconds(1.0));
+  serverApps.Stop(Seconds(10.0));
+  // Create echo client and set its attributes
+  UdpEchoClientHelper echoClient(interfaces.GetAddress(1), 9);
+  echoClient.SetAttribute(&quot;MaxPackets&quot;, UintegerValue(1));
+  echoClient.SetAttribute(&quot;Interval&quot;, packetDelay);
+  echoClient.SetAttribute(&quot;PacketSize&quot;, packetSize);
+  // Install echo client to node 0, mark it application, and set start and stop time
+  ApplicationContainer clientApps = echoClient.Install(nodes.Get(0));
+  clientApps.Start(Seconds(2.0));
+  clientApps.Stop(Seconds(10.0));
+
+  Simulator::Run();
+  Simulator::Destroy();
+  return 0;
+}}
+&quot;&quot;&quot;
+
+        with open(f'{output_folder}/{name}_{packetSize}_{packetDelay.replace(&quot;.0&quot;, &quot;&quot;)}_{dataLinkRate}_{dataLinkDelay}.cc', 'w') as f:
+          f.write(initial_str)
+</code></pre>
+<h3 id="graphing-code">Graphing Code</h3>
+<pre><code>import matplotlib.pyplot as plt
+
+endTime = [2.02686, 2.01843, 2.01562, 2.01422, 2.01337]
+startTime = [2.01343, 2.00922, 2.00781, 2.00711, 2.00669]
+
+totalTime = []
+
+for i in range(len(endTime)):
+  totalTime.append(endTime[i] - startTime[i])
+
+X = [&quot;1Mbps&quot;, &quot;2Mbps&quot;, &quot;3Mbps&quot;, &quot;4Mbps&quot;, &quot;5Mbps&quot;]
+
+plt.plot(X, totalTime)
+plt.show()
+</code></pre></div>
             </div>
         </div>
 
