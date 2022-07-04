@@ -122,12 +122,12 @@ LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
 
     // Node Container
     NodeContainer nodes;
-    nodes.create(2);
+    nodes.Create(2);
 
     // Create Channel
     PointToPointHelper pointToPoint;
-    pointToPoint.setDeviceAttribute(&quot;DataRate&quot;, StringVale(&quot;5Mbps&quot;));
-    pointToPoint.setChannelAttribute(&quot;Delay&quot;, StringValue(&quot;2ms&quot;));
+    pointToPoint.SetDeviceAttribute(&quot;DataRate&quot;, StringValue(&quot;5Mbps&quot;));
+    pointToPoint.SetChannelAttribute(&quot;Delay&quot;, StringValue(&quot;2ms&quot;));
     // Create Net Device and bind them to Channel
     NetDeviceContainer devices;
     devices = pointToPoint.Install(nodes);
@@ -172,13 +172,13 @@ LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
 
   using namespace ns3;
   // Log Component
-  NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;)
+  NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;);
   int main() {
     // Change Parameters.
-    int packetSize = UintegerValue(1024);
-    int packetDelay = TimeValue(Seconds(1.0));
-    int dataLinkRate = &quot;5Mbps&quot;;
-    int dataLinkDelay = &quot;2ms&quot;;
+    auto packetSize = UintegerValue(1024);
+    auto packetDelay = TimeValue(Seconds(1.0));
+    auto dataLinkRate = &quot;5Mbps&quot;;
+    auto dataLinkDelay = &quot;2ms&quot;;
 
     // Set Time Resolution
     Time::SetResolution(Time::NS);
@@ -188,12 +188,12 @@ LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
 
     // Node Container
     NodeContainer nodes;
-    nodes.create(2);
+    nodes.Create(2);
 
     // Create Channel
     PointToPointHelper pointToPoint;
-    pointToPoint.setDeviceAttribute(&quot;DataRate&quot;, StringVale(dataLinkRate));
-    pointToPoint.setChannelAttribute(&quot;Delay&quot;, StringValue(dataLinkDelay));
+    pointToPoint.SetDeviceAttribute(&quot;DataRate&quot;, StringValue(dataLinkRate));
+    pointToPoint.SetChannelAttribute(&quot;Delay&quot;, StringValue(dataLinkDelay));
     // Create Net Device and bind them to Channel
     NetDeviceContainer devices;
     devices = pointToPoint.Install(nodes);
