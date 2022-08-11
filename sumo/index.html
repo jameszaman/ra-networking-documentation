@@ -37,6 +37,9 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="navitem">
+                                <a href="../install/" class="nav-link">Install</a>
+                            </li>
+                            <li class="navitem">
                                 <a href="../ns3/" class="nav-link">NS3</a>
                             </li>
                             <li class="navitem active">
@@ -80,12 +83,51 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#environment-setup" class="nav-link">Environment Setup</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#all-necessary-installs" class="nav-link">All Necessary Installs</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#generating-scenario" class="nav-link">Generating Scenario</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p>This documentation is created for the purpose of helping new learners learn about SUMO and its uses.</p></div>
+<p>This documentation is created for the purpose of helping new learners learn about SUMO and its uses.</p>
+<h1 id="environment-setup">Environment Setup</h1>
+<h2 id="all-necessary-installs">All Necessary Installs</h2>
+<h3 id="make-sure-to-have-sumo-installed">Make sure to have SUMO installed!</h3>
+<p>If you do not have SUMO installed, please check this <a href="/#install-sumo">Install Instruction</a></p>
+<h3 id="for-some-parts-you-will-also-need-ns3">For some parts you will also need NS3.</h3>
+<p>If you do not have NS3 installed, please check this <a href="/#install-ns3">Install Instruction</a></p>
+<h1 id="generating-scenario">Generating Scenario</h1>
+<p>For this tutorial, we shall be using Open Street Map. We have osmWebWizard.py python file that will help us generate sumo files from Open Street map.</p>
+<pre><code>cd ~/repos/sumo/tools
+python osmWebWizard.py
+</code></pre>
+<p><img alt="asd" src="../images/osm.png" /></p>
+<p>First make sure to check the area.</p>
+<p>Select necessary options, i.e., how many cars, how many trucks etc, and their traffic factor.</p>
+<p>After all that choose <code>Generate Scenario</code></p>
+<p>This should open SUMO GUI. You can check to make sure the roads are rendered properly and hace option you can use to run the scenario.</p>
+<p>While running you can check Network Parameters.</p>
+<p>Insude your <code>sumo/tools</code> folder a new folder should be created which will have the name and date of when you generated the scenario.</p>
+<pre><code>Example:
+2022-08-06-03-16-40-12
+</code></pre>
+<p>Go inside that folder and find <code>os.sumocfg</code>.
+Run the command</p>
+<pre><code>sumo -c osm.sumocfg -- fcd-output vanettrace.xml
+</code></pre></div>
             </div>
         </div>
 

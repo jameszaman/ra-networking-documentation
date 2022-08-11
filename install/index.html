@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Install - Documentation</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/color-brewer.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Install</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../ns3/" class="nav-link">NS3</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../sumo/" class="nav-link">SUMO</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../ns3_examples/" class="nav-link">NS3_Examples</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../ns3/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#setting-up-environment" class="nav-link">Setting up environment</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#all-downloads" class="nav-link">All Downloads.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#installing-vmware" class="nav-link">Installing VMWare.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#installing-ubuntu" class="nav-link">Installing Ubuntu.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="setting-up-environment"><strong>Setting up environment</strong></h1>
+<hr />
+<h2 id="all-downloads"><strong>All Downloads.</strong></h2>
+<hr />
+<p>First need to download VMWare workstation pro. <a href="https://download3.vmware.com/software/WKST-1624-WIN/VMware-workstation-full-16.2.4-20089737.exe">Click Here</a>
+or use the link below.</p>
+<pre><code>https://download3.vmware.com/software/WKST-1624-WIN/VMware-workstation-full-16.2.4-20089737.exe
+</code></pre>
+<p>We also need to install Linux 20.04. To install it on a virtual machine, we will be using a <code>.iso</code> file. To download the <code>.iso</code> file <a href="https://releases.ubuntu.com/20.04/ubuntu-20.04.4-desktop-amd64.iso">Click Here</a>
+or use the link below.</p>
+<pre><code>https://releases.ubuntu.com/20.04/ubuntu-20.04.4-desktop-amd64.iso
+</code></pre>
+<hr />
+<h2 id="installing-vmware"><strong>Installing VMWare.</strong></h2>
+<hr />
+<p><img alt="vmware1.png" src="../images/install/vmware1.png" /></p>
+<h5 id="press-next">Press <code>Next</code></h5>
+<p><img alt="vmware1.png" src="../images/install/vmware2.png" /></p>
+<h5 id="agree-to-terms-and-click-next">Agree to terms and click <code>Next</code>.</h5>
+<p><img alt="vmware1.png" src="../images/install/vmware3.png" /></p>
+<h5 id="select-where-to-install-and-next">Select where to install and <code>Next</code>.</h5>
+<p><img alt="vmware1.png" src="../images/install/vmware4.png" /></p>
+<h5 id="untick-both-options-and-click-next">Untick both options and click <code>Next</code>.</h5>
+<p><img alt="vmware1.png" src="../images/install/vmware5.png" /></p>
+<h5 id="at-least-choose-start-menu-program-folder-and-desktop-is-optional-if-you-want-a-desktop-shortcut">At least choose <code>Start Menu Program Folder</code> and Desktop is optional if you want a desktop shortcut.</h5>
+<p><img alt="vmware1.png" src="../images/install/vmware6.png" /></p>
+<h5 id="make-sure-to-click-license-and-not-finish"><strong>Make sure to click <code>License</code> and not Finish!</strong></h5>
+<p><img alt="vmware1.png" src="../images/install/vmware7.png" /></p>
+<h5 id="use-this-licencse-zf3r0-fhed2-m80ty-8qygc-npkyf-and-press-enter">Use this Licencse: <code>ZF3R0-FHED2-M80TY-8QYGC-NPKYF</code> and press <code>Enter.</code></h5>
+<p><img alt="vmware1.png" src="../images/install/vmware8.png" /></p>
+<h5 id="click-finish">Click <code>Finish.</code></h5>
+<h4 id="congratulations-you-have-successfully-installed-vmware-workstation-pro"><strong> Congratulations. You have successfully installed VMWare workstation PRO. </strong></h4>
+<hr />
+<h2 id="installing-ubuntu"><strong>Installing Ubuntu.</strong></h2>
+<hr />
+<p><img alt="vmware1.png" src="../images/install/vmware9.png" /></p>
+<h5 id="press-create-a-new-virtual-machine">Press <code>Create a New Virtual Machine.</code></h5>
+<p><img alt="vmware1.png" src="../images/install/vmware10.png" /></p>
+<h5 id="select-typical-and-press-next">Select <code>typical</code> and press <code>Next</code></h5>
+<p><img alt="vmware1.png" src="../images/install/vmware11.png" /></p>
+<h5 id="make-sure-to-select-i-will-install-the-operating-system-later-and-click-next">Make sure to select <code>I will install the operating system later.</code> and click <code>next</code>.</h5>
+<p><img alt="vmware1.png" src="../images/install/vmware12.png" /></p>
+<h5 id="choose-the-following-options-and-press-next">Choose the following options and press <code>Next</code></h5>
+<pre><code>  Guest Operating System: &quot;Linux&quot;
+  Version: &quot;Ubuntu&quot;
+</code></pre>
+<p><img alt="vmware1.png" src="../images/install/vmware13.png" /></p>
+<h5 id="give-a-proper-name-and-choose-where-to-install-make-sure-to-choose-an-empty-folder-for-installation-after-that-press-next">Give a proper name, and choose where to install. <strong> Make sure to choose an empty folder for installation. </strong> After that press <code>Next</code></h5>
+<p><img alt="vmware1.png" src="../images/install/vmware14.png" /></p>
+<h5 id="make-sure-to-select-store-virtual-disk-as-a-single-file-and-the-required-maximum-disk-size-for-our-task-20gb-should-be-enough-but-select-more-if-you-wish-to">Make sure to select <code>Store virtual disk as a single file</code> and the required Maximum disk size. For our task 20GB should be enough, but select more if you wish to.</h5>
+<p><img alt="vmware1.png" src="../images/install/vmware15.png" /></p>
+<h5 id="something-like-this-should-be-shown-press-finish">Something like this should be shown. Press Finish.</h5>
+<p><img alt="vmware1.png" src="../images/install/vmware16.png" /></p>
+<h5 id="a-new-virtual-environment-should-be-ready-and-can-be-see-on-the-left-side-select-it-and-press-edit-virtual-machine-settings">A new virtual environment should be ready and can be see on the left side. Select it and press <code>Edit virtual machine settings.</code></h5>
+<p><img alt="vmware1.png" src="../images/install/vmware17.png" /></p>
+<h5 id="select-cddvd-sata-and-choose-use-iso-image-file-after-that-browse-and-select-the-ubuntu-iso-file-downloaded-before-press-ok-after-that">Select <code>CD/DVD (SATA)</code> and choose <code>Use ISO image file</code>. After that browse and select the Ubuntu .iso file downloaded before. Press <code>OK</code> after that.</h5>
+<p><img alt="vmware1.png" src="../images/install/vmware18.png" /></p>
+<h5 id="while-the-virtual-machine-is-selected-click-the-green-power-on-this-virtual-machine">While the virtual machine is selected, click the green <code>Power on this virtual machine</code></h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu1.png" /></p>
+<h5 id="wait-for-it-to-load-first-after-that-select-english-as-the-language-and-press-install-ubuntu">Wait for it to load first. After that select <code>English</code> as the language and press <code>Install Ubuntu</code>.</h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu2.png" /></p>
+<h5 id="again-select-english-for-keyboard-and-continue">Again select <code>English</code> for keyboard and <code>continue</code></h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu3.png" /></p>
+<h5 id="after-that-make-sure-to-select-these-options-and-press-continue">After that make sure to select these options and press <code>continue</code></h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu4.png" /></p>
+<h5 id="select-erase-disk-and-install-ubuntu-and-press-install-now-you-do-not-have-to-worry-if-you-are-installing-in-an-empty-folder-nothing-to-be-worried-about">Select <code>Erase disk and install Ubuntu</code>, and press <code>Install Now</code>. You do not have to worry, if you are installing in an empty folder, nothing to be worried about.</h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu5.png" /></p>
+<h5 id="a-popup-will-be-shown-press-continue-if-you-are-installing-in-a-new-folder-nothing-to-worry-about">A popup will be shown. Press <code>Continue</code>, if you are installing in a new folder, nothing to worry about.</h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu6.png" /></p>
+<h5 id="select-your-location-and-press-continue">Select your location, and press <code>Continue</code></h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu7.png" /></p>
+<h5 id="set-credentials-and-press-continue-you-should-make-sure-to-remember-the-credentials-you-may-use-an-easy-credentials-as-you-will-be-typing-it-again-and-again">Set credentials and press <code>Continue</code>. You should make sure to remember the credentials. You may use an easy credentials as you will be typing it again and again.</h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu8.png" /></p>
+<h5 id="when-setup-is-complete-remove-the-iso-file-from-the-current-location-to-another-location-or-delete-it-completely-after-that-press-restart-now">When setup is complete, remove the .iso file from the current location to another location or delete it completely. After that press <code>Restart Now</code></h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu9.png" /></p>
+<h5 id="press-skip">Press <code>Skip</code></h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu10.png" /></p>
+<h5 id="press-next_1">Press <code>Next</code></h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu11.png" /></p>
+<h5 id="select-no-dont-send-system-info-and-press-next">Select <code>No, don't send system info</code>, and press <code>next</code></h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu12.png" /></p>
+<h5 id="press-next_2">Press <code>Next</code></h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu13.png" /></p>
+<h5 id="press-done">Press <code>Done</code></h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu14.png" /></p>
+<h5 id="press-install-now-and-wait-for-it-to-complete-it-will-take-some-time-for-it-to-complete-you-can-see-the-progress-on-the-left-of-your-screen">Press <code>Install Now</code>, and wait for it to complete. It will take some time for it to complete. You can see the progress on the left of your screen.</h5>
+<p><img alt="vmware1.png" src="../images/install/ubuntu15.png" /></p>
+<p>You will be asked to give your password to install necessary updates.</p>
+<h4 id="congratulations-you-have-successfully-installed-linux-in-your-virtual-machine"><strong> Congratulations! You have successfully installed Linux in your virtual machine. </strong></h4></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

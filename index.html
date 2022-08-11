@@ -37,6 +37,9 @@
                                 <a href="." class="nav-link">Home</a>
                             </li>
                             <li class="navitem">
+                                <a href="install/" class="nav-link">Install</a>
+                            </li>
+                            <li class="navitem">
                                 <a href="ns3/" class="nav-link">NS3</a>
                             </li>
                             <li class="navitem">
@@ -59,7 +62,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="ns3/" class="nav-link">
+                                <a rel="next" href="install/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -114,9 +117,6 @@
 Applicable Ubuntu Version - 20.04 LTS</p>
 <p>All the work below are being done in a virtual environment[VMWare Workstation Pro].</p>
 <h1 id="setting-up-environment">Setting Up Environment</h1>
-<p>Make sure system is up to date.</p>
-<pre><code>sudo apt update &amp;&amp; sudo apt upgrade
-</code></pre>
 <h2 id="install-basic-necessities">Install Basic Necessities.</h2>
 <pre><code>sudo apt install build-essential
 sudo apt install python python-dev
@@ -204,14 +204,14 @@ cd
 </code></pre>
 <h5 id="download-and-install-ns-3-and-netanim">Download and Install NS-3 and NetAnim</h5>
 <pre><code># download from ns-3 server
-wget -c https://www.nsnam.org/releases/ns-allinone-3.33.tar.bz2
+wget -c https://www.nsnam.org/releases/ns-allinone-3.29.tar.bz2
 # extract tar.bz2
-tar -xvjf ns-allinone-3.33.tar.bz2
+tar -xvjf ns-allinone-3.29.tar.bz2
 # go back to home folder
 cd
 
 # navigate to ns-3 directory (not the NS-3 all in one)
-cd ns-allinone-3.33/ns-3.33/
+cd ns-allinone-3.29/ns-3.29/
 # Configure the installation
 ./waf configure --enable-examples
 # Build ns-3 installation
@@ -220,7 +220,7 @@ cd ns-allinone-3.33/ns-3.33/
 ./waf --run hello-simulator
 
 # navigate to netanim dir.
-cd ns-allinone-3.33/netanim-3.108/
+cd ns-allinone-3.29/netanim-3.108/
 # configure the build
 make clean
 # compile the build
@@ -361,5 +361,5 @@ sudo apt-get install sumo sumo-tools sumo-doc
 
 <!--
 MkDocs version : 1.3.0
-Build Date UTC : 2022-07-04 15:00:39.863836+00:00
+Build Date UTC : 2022-08-11 09:49:04.660717+00:00
 -->
