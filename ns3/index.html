@@ -37,7 +37,7 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="navitem">
-                                <a href="../install/" class="nav-link">Install</a>
+                                <a href="../environment-setup/" class="nav-link">Environment Setup</a>
                             </li>
                             <li class="navitem active">
                                 <a href="./" class="nav-link">NS3</a>
@@ -57,7 +57,7 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../install/" class="nav-link">
+                                <a rel="prev" href="../environment-setup/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
@@ -84,6 +84,23 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
+            <li class="nav-item" data-level="1"><a href="#installing-ns3" class="nav-link">Installing NS3</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#general-dependencies" class="nav-link">General Dependencies.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#installing-ns3-core-dependencies" class="nav-link">Installing NS3 Core dependencies.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#installing-ns3-software" class="nav-link">Installing NS3 Software.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
             <li class="nav-item" data-level="1"><a href="#all-the-ns3-lab-classes" class="nav-link">All the NS3 Lab Classes.</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-level="2"><a href="#first-class" class="nav-link">First Class</a>
@@ -106,7 +123,117 @@
                     <div class="col-md-9" role="main">
 
 <p>This documentation is created for the purpose of helping new learners learn about NS3 and its uses.</p>
+<hr />
+<h1 id="installing-ns3"><strong> Installing NS3 </strong></h1>
+<hr />
+<p>The whole installation will be done using command line. Open a terminal by press <code>Ctrl + Alt + T</code></p>
+<h2 id="general-dependencies"><strong> General Dependencies. </strong></h2>
+<p><strong> If you have already installed general dependencies before, you do not require to install them. </strong></p>
+<p>Run the following commands one by one to download and install all the general necessary softwares. There is no problem if you have already installed them. Make sure to run all the commands.</p>
+<pre><code>  sudo apt install build-essential
+  sudo apt install python3
+  sudo apt install python3-dev
+  sudo apt install python3-setuptools
+  sudo apt install python3-pip
+  sudo apt install mercurial
+  sudo apt install bzr
+  sudo apt install flex bison
+  sudo apt install tcpdump
+  sudo apt install libxml2
+  sudo apt install libxml2-dev
+  sudo apt install git
+  sudo apt install qt5-default
+  sudo apt install cmake
+  sudo apt install g++
+  sudo apt install libxerces-c-dev
+  sudo apt install libfox-1.6-dev
+  sudo apt install libgdal-dev
+  sudo apt install libproj-dev
+  sudo apt install libgl2ps-dev
+  sudo apt install swig
+  mkdir ~/repos
+</code></pre>
+<p>After you have installed the softwares, We need to add <code>alias python=python3</code> to <code>.bashrc</code>. <strong> If you have already done this, there is no need to do this. </strong></p>
+<p>Use nano to open <code>.bashrc</code>.</p>
+<pre><code>nano ~/.bashrc
+</code></pre>
+<p>And add the following line at the end of the file. You can use <code>Ctrl + S</code> to save the file and <code>Ctrl + X</code> to exit from the file.</p>
+<pre><code>alias python=python3
+</code></pre>
+<p>After that run the following command.</p>
+<pre><code>source ~/.bashrc
+</code></pre>
+<h2 id="installing-ns3-core-dependencies"><strong> Installing NS3 Core dependencies. </strong></h2>
+<pre><code>  sudo apt install libsqlite3-dev
+  sudo apt install libboost-all-dev
+  sudo apt install libssl-dev
+  sudo apt install castxml
+  sudo apt install gir1.2-goocanvas-2.0
+  sudo apt install gir1.2-gtk-3.0
+  sudo apt install libgirepository1.0-dev
+  sudo apt install python3-gi
+  sudo apt install python3-gi-cairo
+  sudo apt install python3-pygraphviz
+  sudo apt install python3-pygccxml
+  sudo apt install g++
+  sudo apt install pkg-config
+  sudo apt install sqlite3
+  sudo apt install qt5-default
+  sudo apt install mercurial
+  sudo apt install ipython3
+  sudo apt install openmpi-bin
+  sudo apt install openmpi-common
+  sudo apt install openmpi-doc
+  sudo apt install libopenmpi-dev
+  sudo apt install autoconf
+  sudo apt install cvs
+  sudo apt install bzr
+  sudo apt install unrar
+  sudo apt install gdb
+  sudo apt install valgrind
+  sudo apt install uncrustify
+  sudo apt install doxygen
+  sudo apt install graphviz
+  sudo apt install imagemagick
+  sudo apt install python3-sphinx
+  sudo apt install dia
+  sudo apt install tcpdump
+  sudo apt install libxml2
+  sudo apt install libxml2-dev
+  sudo apt install cmake
+  sudo apt install libc6-dev
+  sudo apt install libc6-dev-i386
+  sudo apt install libclang-6.0-dev
+  sudo apt install llvm-6.0-dev
+  sudo apt install automake
+</code></pre>
+<h3 id="install-additional-python-packages">Install Additional Python Packages</h3>
+<p>We need to install additional python packages. Run the following commands to install them.</p>
+<pre><code>  sudo su
+  cd
+  pip3 install kiwi
+  exit
+  cd
+</code></pre>
+<h2 id="installing-ns3-software"><strong> Installing NS3 Software. </strong></h2>
+<p>Run the following commands to install NS3 and also NetAnim.</p>
+<pre><code>  cd ~/repos
+  wget -c https://www.nsnam.org/releases/ns-allinone-3.29.tar.bz2
+  tar -xvjf ns-allinone-3.29.tar.bz2
+  cd ns-allinone-3.29/ns-3.29/
+  ./waf configure --enable-examples
+  ./waf
+  ./waf --run hello-simulator
+  cd ns-allinone-3.29/netanim-3.108/
+  make clean
+  qmake NetAnim.pro
+  make
+  ./NetAnim
+</code></pre>
+<h4 id="congratulations-you-have-successfully-installed-ns3-and-netanim"><strong> Congratulations! You have successfully installed NS3 and NetAnim </strong></h4>
+<hr />
 <h1 id="all-the-ns3-lab-classes">All the NS3 Lab Classes.</h1>
+<hr />
 <h2 id="first-class">First Class</h2>
 <h3 id="class-code">Class Code</h3>
 <pre><code>
@@ -170,21 +297,22 @@ LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
 
 </code></pre>
 <h3 id="examples">Examples</h3>
-<pre><code>  #include &quot;ns3/core-module.h&quot;
-  #include &quot;ns3/network-module.h&quot;
-  #include &quot;ns3/internet-module.h&quot;
-  #include &quot;ns3/point-to-point-module.h&quot;
-  #include &quot;ns3/applications-module.h&quot;
+<pre><code>
+#include &quot;ns3/core-module.h&quot;
+#include &quot;ns3/network-module.h&quot;
+#include &quot;ns3/internet-module.h&quot;
+#include &quot;ns3/point-to-point-module.h&quot;
+#include &quot;ns3/applications-module.h&quot;
 
-  using namespace ns3;
-  // Log Component
-  NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;);
-  int main() {
-    // Change Parameters.
-    auto packetSize = UintegerValue(1024);
-    auto packetDelay = TimeValue(Seconds(1.0));
-    auto dataLinkRate = &quot;5Mbps&quot;;
-    auto dataLinkDelay = &quot;2ms&quot;;
+using namespace ns3;
+// Log Component
+NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;);
+int main() {
+// Change Parameters.
+auto packetSize = UintegerValue(1024);
+auto packetDelay = TimeValue(Seconds(1.0));
+auto dataLinkRate = &quot;5Mbps&quot;;
+auto dataLinkDelay = &quot;2ms&quot;;
 
     // Set Time Resolution
     Time::SetResolution(Time::NS);
@@ -231,127 +359,134 @@ LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
     Simulator::Run();
     Simulator::Destroy();
     return 0;
-  }
+
+}
+
 </code></pre>
 <h2 id="second-class">Second Class</h2>
 <h3 id="class-code_1">Class Code</h3>
-<pre><code>  #include &quot;ns3/core-module.h&quot;
-  #include &quot;ns3/network-module.h&quot;
-  #include &quot;ns3/internet-module.h&quot;
-  #include &quot;ns3/point-to-point-module.h&quot;
-  #include &quot;ns3/applications-module.h&quot;
+<pre><code>
+#include &quot;ns3/core-module.h&quot;
+#include &quot;ns3/network-module.h&quot;
+#include &quot;ns3/internet-module.h&quot;
+#include &quot;ns3/point-to-point-module.h&quot;
+#include &quot;ns3/applications-module.h&quot;
 
-  using namespace ns3;
-  // Log Component
-  NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;)
-  // Set Time Resolution
-  Time::SetResolution(Time::NS);
-  // Enable Log Components and set Log levels
-  LogComponentEnable(&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
-  LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
+using namespace ns3;
+// Log Component
+NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;)
+// Set Time Resolution
+Time::SetResolution(Time::NS);
+// Enable Log Components and set Log levels
+LogComponentEnable(&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
+LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
 
-  // Node Container
-  NodeContainer nodes;
-  nodes.create(2);
+// Node Container
+NodeContainer nodes;
+nodes.create(2);
 
-  // Create Channel
-  PointToPointHelper pointToPoint;
-  pointToPoint.setDeviceAttribute(&quot;DataRate&quot;, StringVale(&quot;5Mbps&quot;));
-  pointToPoint.setChannelAttribute(&quot;Delay&quot;, StringValue(&quot;2ms&quot;));
-  // Create Net Device and bind them to Channel
-  NetDeviceContainer devices;
-  devices = pointToPoint.Install(nodes);
+// Create Channel
+PointToPointHelper pointToPoint;
+pointToPoint.setDeviceAttribute(&quot;DataRate&quot;, StringVale(&quot;5Mbps&quot;));
+pointToPoint.setChannelAttribute(&quot;Delay&quot;, StringValue(&quot;2ms&quot;));
+// Create Net Device and bind them to Channel
+NetDeviceContainer devices;
+devices = pointToPoint.Install(nodes);
 
-  // Create InternetStack
-  InternetStackHelper stack;
-  // Set IP network address
-  stack.Install(nodes);
-  Ipv4AddressHelper address;
-  // Assign IP to NetDevice
-  address.SetBase(&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
-  Ipv4InterfaceContainer interfaces = address.Assign(devices);
-  // Create echo server
-  UdpEchoServerHelper echoServer(9);
-  // Install echo server to node 1, mark it application, and set start and stop time
-  ApplicationContainer serverApps = echoServer.Install(nodes.Get(1));
-  serverApps.Start(Seconds(1.0));
-  serverApps.Stop(Seconds(10.0));
-  // Create echo client and set its attributes
-  UdpEchoClientHelper echoClient(interfaces.GetAddress(1), 9);
-  echoClient.SetAttribute(&quot;MaxPackets&quot;, UintegerValue(1));
-  echoClient.SetAttribute(&quot;Interval&quot;, TimeValue(Seconds(1.0)));
-  echoClient.SetAttribute(&quot;PacketSize&quot;, UintegerValue(1024));
-  // Install echo client to node 0, mark it application, and set start and stop time
-  ApplicationContainer clientApps = echoClient.Install(nodes.Get(0));
-  clientApps.Start(Seconds(2.0));
-  clientApps.Stop(Seconds(10.0));
+// Create InternetStack
+InternetStackHelper stack;
+// Set IP network address
+stack.Install(nodes);
+Ipv4AddressHelper address;
+// Assign IP to NetDevice
+address.SetBase(&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
+Ipv4InterfaceContainer interfaces = address.Assign(devices);
+// Create echo server
+UdpEchoServerHelper echoServer(9);
+// Install echo server to node 1, mark it application, and set start and stop time
+ApplicationContainer serverApps = echoServer.Install(nodes.Get(1));
+serverApps.Start(Seconds(1.0));
+serverApps.Stop(Seconds(10.0));
+// Create echo client and set its attributes
+UdpEchoClientHelper echoClient(interfaces.GetAddress(1), 9);
+echoClient.SetAttribute(&quot;MaxPackets&quot;, UintegerValue(1));
+echoClient.SetAttribute(&quot;Interval&quot;, TimeValue(Seconds(1.0)));
+echoClient.SetAttribute(&quot;PacketSize&quot;, UintegerValue(1024));
+// Install echo client to node 0, mark it application, and set start and stop time
+ApplicationContainer clientApps = echoClient.Install(nodes.Get(0));
+clientApps.Start(Seconds(2.0));
+clientApps.Stop(Seconds(10.0));
 
-  Simulator::Run();
-  Simulator::Destroy();
-  return 0;
+Simulator::Run();
+Simulator::Destroy();
+return 0;
+
 </code></pre>
 <h3 id="examples_1">Examples</h3>
-<pre><code>  #include &quot;ns3/core-module.h&quot;
-  #include &quot;ns3/network-module.h&quot;
-  #include &quot;ns3/internet-module.h&quot;
-  #include &quot;ns3/point-to-point-module.h&quot;
-  #include &quot;ns3/applications-module.h&quot;
+<pre><code>
+#include &quot;ns3/core-module.h&quot;
+#include &quot;ns3/network-module.h&quot;
+#include &quot;ns3/internet-module.h&quot;
+#include &quot;ns3/point-to-point-module.h&quot;
+#include &quot;ns3/applications-module.h&quot;
 
-  using namespace ns3;
-  // Log Component
-  NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;)
-  // Set Time Resolution
-  Time::SetResolution(Time::NS);
-  // Enable Log Components and set Log levels
-  LogComponentEnable(&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
-  LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
+using namespace ns3;
+// Log Component
+NS_LOG_COMPONENT_DEFINE(&quot;FirstScrpitExample&quot;)
+// Set Time Resolution
+Time::SetResolution(Time::NS);
+// Enable Log Components and set Log levels
+LogComponentEnable(&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
+LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
 
-  // Node Container
-  NodeContainer nodes;
-  nodes.create(2);
+// Node Container
+NodeContainer nodes;
+nodes.create(2);
 
-  // Create Channel
-  PointToPointHelper pointToPoint;
-  pointToPoint.setDeviceAttribute(&quot;DataRate&quot;, StringVale(&quot;5Mbps&quot;));
-  pointToPoint.setChannelAttribute(&quot;Delay&quot;, StringValue(&quot;2ms&quot;));
-  // Create Net Device and bind them to Channel
-  NetDeviceContainer devices;
-  devices = pointToPoint.Install(nodes);
+// Create Channel
+PointToPointHelper pointToPoint;
+pointToPoint.setDeviceAttribute(&quot;DataRate&quot;, StringVale(&quot;5Mbps&quot;));
+pointToPoint.setChannelAttribute(&quot;Delay&quot;, StringValue(&quot;2ms&quot;));
+// Create Net Device and bind them to Channel
+NetDeviceContainer devices;
+devices = pointToPoint.Install(nodes);
 
-  // Create InternetStack
-  InternetStackHelper stack;
-  // Set IP network address
-  stack.Install(nodes);
-  Ipv4AddressHelper address;
-  // Assign IP to NetDevice
-  address.SetBase(&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
-  Ipv4InterfaceContainer interfaces = address.Assign(devices);
-  // Create echo server
-  UdpEchoServerHelper echoServer(9);
-  // Install echo server to node 1, mark it application, and set start and stop time
-  ApplicationContainer serverApps = echoServer.Install(nodes.Get(1));
-  serverApps.Start(Seconds(1.0));
-  serverApps.Stop(Seconds(10.0));
-  // Create echo client and set its attributes
-  UdpEchoClientHelper echoClient(interfaces.GetAddress(1), 9);
-  echoClient.SetAttribute(&quot;MaxPackets&quot;, UintegerValue(1));
-  echoClient.SetAttribute(&quot;Interval&quot;, TimeValue(Seconds(1.0)));
-  echoClient.SetAttribute(&quot;PacketSize&quot;, UintegerValue(1024));
-  // Install echo client to node 0, mark it application, and set start and stop time
-  ApplicationContainer clientApps = echoClient.Install(nodes.Get(0));
-  clientApps.Start(Seconds(2.0));
-  clientApps.Stop(Seconds(10.0));
+// Create InternetStack
+InternetStackHelper stack;
+// Set IP network address
+stack.Install(nodes);
+Ipv4AddressHelper address;
+// Assign IP to NetDevice
+address.SetBase(&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
+Ipv4InterfaceContainer interfaces = address.Assign(devices);
+// Create echo server
+UdpEchoServerHelper echoServer(9);
+// Install echo server to node 1, mark it application, and set start and stop time
+ApplicationContainer serverApps = echoServer.Install(nodes.Get(1));
+serverApps.Start(Seconds(1.0));
+serverApps.Stop(Seconds(10.0));
+// Create echo client and set its attributes
+UdpEchoClientHelper echoClient(interfaces.GetAddress(1), 9);
+echoClient.SetAttribute(&quot;MaxPackets&quot;, UintegerValue(1));
+echoClient.SetAttribute(&quot;Interval&quot;, TimeValue(Seconds(1.0)));
+echoClient.SetAttribute(&quot;PacketSize&quot;, UintegerValue(1024));
+// Install echo client to node 0, mark it application, and set start and stop time
+ApplicationContainer clientApps = echoClient.Install(nodes.Get(0));
+clientApps.Start(Seconds(2.0));
+clientApps.Stop(Seconds(10.0));
 
-  AsciiTraceHelper ascii;
-  pointToPoint.EnableAsciiAll (ascii.CreateFileStream (”myfirst.tr”));
+AsciiTraceHelper ascii;
+pointToPoint.EnableAsciiAll (ascii.CreateFileStream (”myfirst.tr”));
 
-  Simulator::Run();
-  Simulator::Destroy();
-  return 0;
+Simulator::Run();
+Simulator::Destroy();
+return 0;
+
 </code></pre>
 <h2 id="third-class">Third Class</h2>
 <h3 id="class-code_2">Class Code</h3>
-<pre><code>#include &quot;ns3/core-module.h&quot;
+<pre><code>
+#include &quot;ns3/core-module.h&quot;
 #include &quot;ns3/network-module.h&quot;
 #include &quot;ns3/csma-module.h&quot;
 #include &quot;ns3/internet-module.h&quot;
@@ -361,94 +496,93 @@ LogComponentEnable(&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
 
 // Default Network Topology
 //
-//       10.1.1.0
-// n0 -------------- n1   n2   n3   n4
-//    point-to-point  |    |    |    |
-//                    ================
-//                      LAN 10.1.2.0
-
+// 10.1.1.0
+// n0 -------------- n1 n2 n3 n4
+// point-to-point | | | |
+// ================
+// LAN 10.1.2.0
 
 using namespace ns3;
 
 NS_LOG_COMPONENT_DEFINE (&quot;SecondScriptExample&quot;);
 
 int
-main (int argc, char *argv[])
+main (int argc, char \*argv[])
 {
-  bool verbose = true;
-  uint32_t nCsma = 3;
+bool verbose = true;
+uint32_t nCsma = 3;
 
-  CommandLine cmd (__FILE__);
-  cmd.AddValue (&quot;nCsma&quot;, &quot;Number of \&quot;extra\&quot; CSMA nodes/devices&quot;, nCsma);
-  cmd.AddValue (&quot;verbose&quot;, &quot;Tell echo applications to log if true&quot;, verbose);
+CommandLine cmd (**FILE**);
+cmd.AddValue (&quot;nCsma&quot;, &quot;Number of \&quot;extra\&quot; CSMA nodes/devices&quot;, nCsma);
+cmd.AddValue (&quot;verbose&quot;, &quot;Tell echo applications to log if true&quot;, verbose);
 
-  cmd.Parse (argc,argv);
+cmd.Parse (argc,argv);
 
-  if (verbose)
-  {
-    LogComponentEnable (&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
-    LogComponentEnable (&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
-  }
+if (verbose)
+{
+LogComponentEnable (&quot;UdpEchoClientApplication&quot;, LOG_LEVEL_INFO);
+LogComponentEnable (&quot;UdpEchoServerApplication&quot;, LOG_LEVEL_INFO);
+}
 
-  nCsma = nCsma == 0 ? 1 : nCsma;
+nCsma = nCsma == 0 ? 1 : nCsma;
 
-  NodeContainer p2pNodes;
-  p2pNodes.Create (2);
+NodeContainer p2pNodes;
+p2pNodes.Create (2);
 
-  NodeContainer csmaNodes;
-  csmaNodes.Add (p2pNodes.Get (1));
-  csmaNodes.Create (nCsma);
+NodeContainer csmaNodes;
+csmaNodes.Add (p2pNodes.Get (1));
+csmaNodes.Create (nCsma);
 
-  PointToPointHelper pointToPoint;
-  pointToPoint.SetDeviceAttribute (&quot;DataRate&quot;, StringValue (&quot;5Mbps&quot;));
-  pointToPoint.SetChannelAttribute (&quot;Delay&quot;, StringValue (&quot;2ms&quot;));
+PointToPointHelper pointToPoint;
+pointToPoint.SetDeviceAttribute (&quot;DataRate&quot;, StringValue (&quot;5Mbps&quot;));
+pointToPoint.SetChannelAttribute (&quot;Delay&quot;, StringValue (&quot;2ms&quot;));
 
-  NetDeviceContainer p2pDevices;
-  p2pDevices = pointToPoint.Install (p2pNodes);
+NetDeviceContainer p2pDevices;
+p2pDevices = pointToPoint.Install (p2pNodes);
 
-  CsmaHelper csma;
-  csma.SetChannelAttribute (&quot;DataRate&quot;, StringValue (&quot;100Mbps&quot;));
-  csma.SetChannelAttribute (&quot;Delay&quot;, TimeValue (NanoSeconds (6560)));
+CsmaHelper csma;
+csma.SetChannelAttribute (&quot;DataRate&quot;, StringValue (&quot;100Mbps&quot;));
+csma.SetChannelAttribute (&quot;Delay&quot;, TimeValue (NanoSeconds (6560)));
 
-  NetDeviceContainer csmaDevices;
-  csmaDevices = csma.Install (csmaNodes);
+NetDeviceContainer csmaDevices;
+csmaDevices = csma.Install (csmaNodes);
 
-  InternetStackHelper stack;
-  stack.Install (p2pNodes.Get (0));
-  stack.Install (csmaNodes);
+InternetStackHelper stack;
+stack.Install (p2pNodes.Get (0));
+stack.Install (csmaNodes);
 
-  Ipv4AddressHelper address;
-  address.SetBase (&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
-  Ipv4InterfaceContainer p2pInterfaces;
-  p2pInterfaces = address.Assign (p2pDevices);
+Ipv4AddressHelper address;
+address.SetBase (&quot;10.1.1.0&quot;, &quot;255.255.255.0&quot;);
+Ipv4InterfaceContainer p2pInterfaces;
+p2pInterfaces = address.Assign (p2pDevices);
 
-  address.SetBase (&quot;10.1.2.0&quot;, &quot;255.255.255.0&quot;);
-  Ipv4InterfaceContainer csmaInterfaces;
-  csmaInterfaces = address.Assign (csmaDevices);
+address.SetBase (&quot;10.1.2.0&quot;, &quot;255.255.255.0&quot;);
+Ipv4InterfaceContainer csmaInterfaces;
+csmaInterfaces = address.Assign (csmaDevices);
 
-  UdpEchoServerHelper echoServer (9);
+UdpEchoServerHelper echoServer (9);
 
-  ApplicationContainer serverApps = echoServer.Install (csmaNodes.Get (nCsma));
-  serverApps.Start (Seconds (1.0));
-  serverApps.Stop (Seconds (10.0));
+ApplicationContainer serverApps = echoServer.Install (csmaNodes.Get (nCsma));
+serverApps.Start (Seconds (1.0));
+serverApps.Stop (Seconds (10.0));
 
-  UdpEchoClientHelper echoClient (csmaInterfaces.GetAddress (nCsma), 9);
-  echoClient.SetAttribute (&quot;MaxPackets&quot;, UintegerValue (1));
-  echoClient.SetAttribute (&quot;Interval&quot;, TimeValue (Seconds (1.0)));
-  echoClient.SetAttribute (&quot;PacketSize&quot;, UintegerValue (1024));
+UdpEchoClientHelper echoClient (csmaInterfaces.GetAddress (nCsma), 9);
+echoClient.SetAttribute (&quot;MaxPackets&quot;, UintegerValue (1));
+echoClient.SetAttribute (&quot;Interval&quot;, TimeValue (Seconds (1.0)));
+echoClient.SetAttribute (&quot;PacketSize&quot;, UintegerValue (1024));
 
-  ApplicationContainer clientApps = echoClient.Install (p2pNodes.Get (0));
-  clientApps.Start (Seconds (2.0));
-  clientApps.Stop (Seconds (10.0));
+ApplicationContainer clientApps = echoClient.Install (p2pNodes.Get (0));
+clientApps.Start (Seconds (2.0));
+clientApps.Stop (Seconds (10.0));
 
-  Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
 
-  pointToPoint.EnablePcapAll (&quot;second&quot;);
-  csma.EnablePcap (&quot;second&quot;, csmaDevices.Get (1), true);
+pointToPoint.EnablePcapAll (&quot;second&quot;);
+csma.EnablePcap (&quot;second&quot;, csmaDevices.Get (1), true);
 
-  Simulator::Run ();
-  Simulator::Destroy ();
-  return 0;
+Simulator::Run ();
+Simulator::Destroy ();
+return 0;
 }
 
 </code></pre>
@@ -459,7 +593,9 @@ main (int argc, char *argv[])
 <li>How can we set routing functionality?</li>
 <li>How can we enable pcap logging for specific devices?</li>
 <li>How can we set a promiscuos mode and why do we need it?</li>
-</ol></div>
+</ol>
+<pre><code>
+</code></pre></div>
             </div>
         </div>
 

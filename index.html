@@ -37,7 +37,7 @@
                                 <a href="." class="nav-link">Home</a>
                             </li>
                             <li class="navitem">
-                                <a href="install/" class="nav-link">Install</a>
+                                <a href="environment-setup/" class="nav-link">Environment Setup</a>
                             </li>
                             <li class="navitem">
                                 <a href="ns3/" class="nav-link">NS3</a>
@@ -62,7 +62,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="install/" class="nav-link">
+                                <a rel="next" href="environment-setup/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -83,31 +83,6 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
-            
-            <li class="nav-item" data-level="1"><a href="#setting-up-environment" class="nav-link">Setting Up Environment</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#install-basic-necessities" class="nav-link">Install Basic Necessities.</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#install-ns3" class="nav-link">Install NS3</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#install-ns3-alternative-not-recommended" class="nav-link">Install NS3 [Alternative, Not Recommended]</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#install-gnuplot" class="nav-link">Install GNUPlot</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#install-sumo" class="nav-link">Install SUMO</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
         </ul>
     </div>
 </div></div>
@@ -116,171 +91,8 @@
 <p>This documentation has been created from the ground up by James Zaman.
 Applicable Ubuntu Version - 20.04 LTS</p>
 <p>All the work below are being done in a virtual environment[VMWare Workstation Pro].</p>
-<h1 id="setting-up-environment">Setting Up Environment</h1>
-<h2 id="install-basic-necessities">Install Basic Necessities.</h2>
-<pre><code>sudo apt install build-essential
-sudo apt install python python-dev
-sudo apt install mercurial
-sudo apt install bzr
-sudo apt install flex bison
-sudo apt install tcpdump
-sudo apt install libxml2 libxml2-dev
-sudo apt install git
-sudo apt install qt5-default
-sudo apt install cmake
-sudo apt install g++
-sudo apt install libxerces-c-dev
-sudo apt install libfox-1.6-dev
-sudo apt install libgdal-dev
-sudo apt install libproj-dev
-sudo apt install libgl2ps-dev
-sudo apt install swig
-</code></pre>
-<p>You may also try to install them in one command. But this makes it harder to identify error if any.</p>
-<pre><code>sudo apt install --quiet build-essential python python-dev mercurial bzr flex bison tcpdump libxml2 libxml2-dev git qt5-default cmake g++ libxerces-c-dev libfox-1.6-dev libgdal-dev libproj-dev libgl2ps-dev swig
-</code></pre>
-<p>Add Python alis</p>
-<pre><code>nano ~/.bashrc
-</code></pre>
-<p>After that add the following line</p>
-<pre><code>alias python=python3
-</code></pre>
-<p>After that run the following command
-source ~/.bashrc</p>
-<h2 id="install-ns3">Install NS3</h2>
-<h5 id="install-core-dependencies">Install Core Dependencies</h5>
-<pre><code>sudo apt install build-essential libsqlite3-dev libboost-all-dev libssl-dev git python3-setuptools castxml
-</code></pre>
-<h5 id="install-dependencies-for-ns-3-python-bindings">Install Dependencies for NS-3 Python bindings</h5>
-<pre><code>sudo apt install  gir1.2-goocanvas-2.0
-sudo apt install  gir1.2-gtk-3.0
-sudo apt install  libgirepository1.0-dev
-sudo apt install  python3-dev
-sudo apt install  python3-gi
-sudo apt install  python3-gi-cairo
-sudo apt install  python3-pip
-sudo apt install  python3-pygraphviz
-sudo apt install  python3-pygccxml
-</code></pre>
-<h5 id="install-dependencies-for-ns-3">Install Dependencies for NS-3</h5>
-<pre><code>sudo apt install g++
-sudo apt install pkg-config
-sudo apt install sqlite3
-sudo apt install qt5-default
-sudo apt install mercurial
-sudo apt install ipython3
-sudo apt install openmpi-bin
-sudo apt install openmpi-common
-sudo apt install openmpi-doc
-sudo apt install libopenmpi-dev
-sudo apt install autoconf
-sudo apt install cvs
-sudo apt install bzr
-sudo apt install unrar
-sudo apt install gdb
-sudo apt install valgrind
-sudo apt install uncrustify
-sudo apt install doxygen
-sudo apt install graphviz
-sudo apt install imagemagick
-sudo apt install python3-sphinx
-sudo apt install dia
-sudo apt install tcpdump
-sudo apt install libxml2
-sudo apt install libxml2-dev
-sudo apt install cmake
-sudo apt install libc6-dev
-sudo apt install libc6-dev-i386
-sudo apt install libclang-6.0-dev
-sudo apt install llvm-6.0-dev
-sudo apt install automake
-</code></pre>
-<h5 id="install-additional-python-packages">Install Additional Python Packages</h5>
-<pre><code>sudo su
-cd
-pip3 install kiwi
-exit
-cd
-</code></pre>
-<h5 id="download-and-install-ns-3-and-netanim">Download and Install NS-3 and NetAnim</h5>
-<pre><code># download from ns-3 server
-wget -c https://www.nsnam.org/releases/ns-allinone-3.29.tar.bz2
-# extract tar.bz2
-tar -xvjf ns-allinone-3.29.tar.bz2
-# go back to home folder
-cd
-
-# navigate to ns-3 directory (not the NS-3 all in one)
-cd ns-allinone-3.29/ns-3.29/
-# Configure the installation
-./waf configure --enable-examples
-# Build ns-3 installation
-./waf
-# to check whether installation was a success
-./waf --run hello-simulator
-
-# navigate to netanim dir.
-cd ns-allinone-3.29/netanim-3.108/
-# configure the build
-make clean
-# compile the build
-qmake NetAnim.pro
-# build netanim installation
-make
-# to execute NetAnim
-./NetAnim
-</code></pre>
-<h2 id="install-ns3-alternative-not-recommended">Install NS3 [Alternative, Not Recommended]</h2>
-<pre><code>cd ~
-mkdir repos
-cd repos
-git clone https://gitlab.com/nsnam/ns-3-allinone.git
-cd ns-allinone
-### Download NS3
-./download.py
-### Build NS3
-./build.py --enable-examples --enable-tests
-</code></pre>
-<p>Examples [Incomplete - Not entirely correct]</p>
-<pre><code>cd ns-3.14
-./waf configure --enable-examples
-./waf
-./waf --run hello-simulator
-</code></pre>
-<p>NetAnim Install</p>
-<pre><code>cd ~/repos/ns-3-allinone/ns-3-dev
-qmake NetAnim.pro
-make
-</code></pre>
-<p>Run</p>
-<pre><code>./NetAnim
-</code></pre>
-<h2 id="install-gnuplot">Install GNUPlot</h2>
-<pre><code>sudo apt install gnuplot
-</code></pre>
-<h2 id="install-sumo">Install SUMO</h2>
-<pre><code>cd ~/repos
-git clone --recursive https://github.com/eclipse/sumo
-</code></pre>
-<h3 id="building-sumo">Building SUMO</h3>
-<pre><code>mkdir sumo/build/cmake-build &amp;&amp; cd sumo/build/cmake-build
-cmake ../..
-make -j8
-
-</code></pre>
-<h3 id="setting-path-for-sumo">Setting Path for sumo</h3>
-<pre><code>nano ~/.bashrc
-export SUMO_HOME=&quot;$PWD/bin/sumo&quot;
-</code></pre>
-<h3 id="alternative-way-to-install-sumonot-tested">Alternative way to install SUMO(Not Tested!)</h3>
-<h5 id="download">Download</h5>
-<pre><code>https://sumo.dlr.de/docs/Installing.html
-</code></pre>
-<pre><code>sudo add-apt-repository ppa:sumo/stable
-sudo apt-get update
-sudo apt-get install sumo sumo-tools sumo-doc
-
-</code></pre></div>
+<p><strong> It is assumed that the user has some basic knowledge of Linux. </strong></p>
+<p>If you do not know where to start, <a href="/environment-setup/">Start Here!</a></p></div>
             </div>
         </div>
 
@@ -361,5 +173,5 @@ sudo apt-get install sumo sumo-tools sumo-doc
 
 <!--
 MkDocs version : 1.3.0
-Build Date UTC : 2022-08-11 09:49:04.660717+00:00
+Build Date UTC : 2022-08-11 11:12:25.193784+00:00
 -->

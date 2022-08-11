@@ -37,7 +37,7 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="navitem">
-                                <a href="../install/" class="nav-link">Install</a>
+                                <a href="../environment-setup/" class="nav-link">Environment Setup</a>
                             </li>
                             <li class="navitem">
                                 <a href="../ns3/" class="nav-link">NS3</a>
@@ -84,9 +84,13 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#environment-setup" class="nav-link">Environment Setup</a>
+            <li class="nav-item" data-level="1"><a href="#installing-sumo" class="nav-link">Installing SUMO</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#all-necessary-installs" class="nav-link">All Necessary Installs</a>
+            <li class="nav-item" data-level="2"><a href="#general-dependencies" class="nav-link">General Dependencies.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#download-and-install-sumo" class="nav-link">Download and Install SUMO</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -103,18 +107,65 @@
                     <div class="col-md-9" role="main">
 
 <p>This documentation is created for the purpose of helping new learners learn about SUMO and its uses.</p>
-<h1 id="environment-setup">Environment Setup</h1>
-<h2 id="all-necessary-installs">All Necessary Installs</h2>
-<h3 id="make-sure-to-have-sumo-installed">Make sure to have SUMO installed!</h3>
-<p>If you do not have SUMO installed, please check this <a href="/#install-sumo">Install Instruction</a></p>
-<h3 id="for-some-parts-you-will-also-need-ns3">For some parts you will also need NS3.</h3>
-<p>If you do not have NS3 installed, please check this <a href="/#install-ns3">Install Instruction</a></p>
+<hr />
+<h1 id="installing-sumo"><strong> Installing SUMO </strong></h1>
+<hr />
+<p>The whole installation will be done using command line. Open a terminal by press <code>Ctrl + Alt + T</code></p>
+<h2 id="general-dependencies"><strong> General Dependencies. </strong></h2>
+<p><strong> If you have already installed general dependencies before, you do not require to install them. </strong></p>
+<p>Run the following commands one by one to download and install all the general necessary softwares. There is no problem if you have already installed them. Make sure to run all the commands.</p>
+<pre><code>  sudo apt install build-essential
+  sudo apt install python3
+  sudo apt install python3-dev
+  sudo apt install python3-setuptools
+  sudo apt install python3-pip
+  sudo apt install mercurial
+  sudo apt install bzr
+  sudo apt install flex bison
+  sudo apt install tcpdump
+  sudo apt install libxml2
+  sudo apt install libxml2-dev
+  sudo apt install git
+  sudo apt install qt5-default
+  sudo apt install cmake
+  sudo apt install g++
+  sudo apt install libxerces-c-dev
+  sudo apt install libfox-1.6-dev
+  sudo apt install libgdal-dev
+  sudo apt install libproj-dev
+  sudo apt install libgl2ps-dev
+  sudo apt install swig
+  mkdir ~/repos
+</code></pre>
+<p>After you have installed the softwares, We need to add <code>alias python=python3</code> to <code>.bashrc</code>. <strong> If you have already done this, there is no need to do this. </strong></p>
+<p>Use nano to open <code>.bashrc</code>.</p>
+<pre><code>nano ~/.bashrc
+</code></pre>
+<p>And add the following line at the end of the file. You can use <code>Ctrl + S</code> to save the file and <code>Ctrl + X</code> to exit from the file.</p>
+<pre><code>alias python=python3
+</code></pre>
+<p>After that run the following command.</p>
+<pre><code>source ~/.bashrc
+</code></pre>
+<h2 id="download-and-install-sumo">Download and Install SUMO</h2>
+<pre><code>  cd ~/repos
+  git clone --recursive https://github.com/eclipse/sumo
+  mkdir sumo/build/cmake-build &amp;&amp; cd sumo/build/cmake-build
+  cmake ../..
+  make -j8
+</code></pre>
+<p>After you have successfully installed SUMO, open <code>.bashrc</code></p>
+<pre><code>  nano ~/.bashrc
+</code></pre>
+<p>And add the following line at the end of the file. You can use <code>Ctrl + S</code> to save the file and <code>Ctrl + X</code> to exit from the file.</p>
+<pre><code>  export SUMO_HOME=&quot;$PWD/bin/sumo&quot;
+</code></pre>
 <h1 id="generating-scenario">Generating Scenario</h1>
 <p>For this tutorial, we shall be using Open Street Map. We have osmWebWizard.py python file that will help us generate sumo files from Open Street map.</p>
 <pre><code>cd ~/repos/sumo/tools
 python osmWebWizard.py
 </code></pre>
-<p><img alt="asd" src="../images/osm.png" /></p>
+<p><img alt="asd" src="images/osm.png" /></p>
 <p>First make sure to check the area.</p>
 <p>Select necessary options, i.e., how many cars, how many trucks etc, and their traffic factor.</p>
 <p>After all that choose <code>Generate Scenario</code></p>
