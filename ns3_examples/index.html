@@ -98,7 +98,9 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="ns3-comparison-graphs">NS3 comparison graphs.</h1>
+<p>This documentation was created for the purpose of showing domenstration of differences of NS3 results if certain parameters are changed. We change the parameters and create a graph from the found result.</p>
 <h2 id="python-code-used-to-generate-all-the-codes">Python code used to generate all the codes.</h2>
+<p>This is the code for generating all the different files needed for generating our graph. We generate different files with different values and run them.</p>
 <pre><code class="language-python">import os
 import shutil
 
@@ -188,6 +190,7 @@ int main() {{
           f.write(initial_str)
 </code></pre>
 <h3 id="graphing-code">Graphing Code</h3>
+<p>You can use this code for generating graphs from running the files generated from the above code.</p>
 <pre><code>import matplotlib.pyplot as plt
 
 endTime = [2.02686, 2.01843, 2.01562, 2.01422, 2.01337]
