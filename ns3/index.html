@@ -127,7 +127,7 @@
 <h1 id="installing-ns3"><strong> Installing NS3 </strong></h1>
 <hr />
 <p>It is assumed that you are installing NS3 in Ubuntu - 20.04 LTS Operating System. If you do not have Ubuntu installed please check <a href="environment-setup">Environment Setup</a> first before following this documentation.</p>
-<p>The whole installation will be done using command line. Open a terminal by press <code>Ctrl + Alt + T</code></p>
+<p>The whole installation will be done using command line. Open a terminal by press <code>Ctrl + Alt + T</code>. If you are getting any error, please make sure internet is available and wait for some time, as other process might be making the system busy.</p>
 <h2 id="general-dependencies"><strong> General Dependencies. </strong></h2>
 <p><strong> If you have already installed general dependencies before, you do not require to install them. </strong></p>
 <p>Run the following commands one by one to download and install all the general necessary softwares. There is no problem if you have already installed them. Make sure to run all the commands.</p>
@@ -152,6 +152,7 @@
   sudo apt install libproj-dev
   sudo apt install libgl2ps-dev
   sudo apt install swig
+  sudo apt install python-is-python3
   mkdir ~/repos
 </code></pre>
 <p>After you have installed the softwares, We need to add <code>alias python=python3</code> to <code>.bashrc</code>. <strong> If you have already done this, there is no need to do this. </strong></p>
